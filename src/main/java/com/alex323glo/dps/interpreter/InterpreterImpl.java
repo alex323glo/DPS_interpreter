@@ -54,13 +54,11 @@ public class InterpreterImpl implements Interpreter {
 
         List<Command> commandList = commandParser.parse(commands);   // throws ParserException !
 
-        if (commandList == null) {
-            throw new ParserException("...");
+        if (commandList == null || commandList.size() < 1) {
+            throw new ParserException("commandList is null, empty or was not created during parsing)");
         }
 
-        // TODO finish !
-
-        return null;
+        return commandList;
     }
 
     /**
