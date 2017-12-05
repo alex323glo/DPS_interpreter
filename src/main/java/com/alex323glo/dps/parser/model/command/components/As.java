@@ -1,4 +1,4 @@
-package com.alex323glo.dps.interpreter.model.command.components;
+package com.alex323glo.dps.parser.model.command.components;
 
 /**
  * TODO add doc
