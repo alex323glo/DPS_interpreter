@@ -1,7 +1,13 @@
 package com.alex323glo.dps.interpreter.exception;
 
 /**
- * Created by alex323glo on 30.11.17.
+ * DPS Interpreter execution exception class. Caused when Interpreter in some reasons
+ * can't interpret needed DPS commands on initial DPS (script) State.
+ *
+ * @author alex323glo
+ * @version 1.0.0
+ *
+ * @see com.alex323glo.dps.interpreter.Interpreter
  */
 public class InterpreterException extends Exception {
     /**
