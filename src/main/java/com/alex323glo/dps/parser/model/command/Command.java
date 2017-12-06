@@ -3,23 +3,74 @@ package com.alex323glo.dps.parser.model.command;
 import com.alex323glo.dps.parser.model.command.components.Settings;
 import com.alex323glo.dps.interpreter.model.config.Config;
 import com.alex323glo.dps.interpreter.model.state.State;
+import com.alex323glo.dps.parser.model.command.executor.Executor;
 import com.dima.dps.parser.parser_commands.ExecutionCommand;
 import org.json.JSONObject;
 
 /**
- * TODO add doc
+ * Abstraction of interpreted Command.
+ *
+ * @author alex323glo
+ * @version 1.0.0
+ *
+ * @see com.alex323glo.dps.interpreter.Interpreter
  */
-public abstract class Command {
+public class Command {
 
     private ExecutionCommand executionCommand;
 
-    // TODO finish
-    public abstract State execute(Command command, State state, Config config);
+    private Executor executor;
 
+    /**
+     * Initial constructor.
+     *
+     * @param executionCommand initial field value.
+     * @param executor initial field value.
+     *
+     * @see ExecutionCommand
+     * @see Executor
+     * */
+    public Command(ExecutionCommand executionCommand, Executor executor) {
+        this.executionCommand = executionCommand;
+        this.executor = executor;
+    }
+
+    /**
+     * Executes current Command.
+     *
+     * @param state initial state of DPS (script).
+     * @param config configurations of Command execution.
+     * @return result state of DPS (script).
+     *
+     * @see State
+     * @see Config
+     */
+    public State execute(State state, Config config) {
+        if (executor == null || executionCommand == null) {
+            throw new NullPointerException("executionCommand or executor is null");
+        }
+
+        return executor.execute(this, state, config);
+    }
+
+    /**
+     * Params property getter.
+     *
+     * @return JSON object, which contains params.
+     *
+     * @see JSONObject
+     * */
     public JSONObject getParamsJSON() {
         return executionCommand.getParams();
     }
 
+    /**
+     * Params property setter.
+     *
+     * @param paramsJSON initial value of property.
+     *
+     * @see JSONObject
+     */
     public void setParamsJSON(JSONObject paramsJSON) {
         if (paramsJSON == null) {
             throw new NullPointerException("paramsJSON is null");
