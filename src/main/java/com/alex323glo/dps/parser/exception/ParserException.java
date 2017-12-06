@@ -1,7 +1,13 @@
 package com.alex323glo.dps.parser.exception;
 
 /**
- * Created by alex323glo on 05.12.17.
+ * DPS Parser execution exception class. Caused when CommandParser in some reasons
+ * can't parse needed DPS commands.
+ *
+ * @author alex323glo
+ * @version 1.0.0
+ *
+ * @see com.alex323glo.dps.parser.CommandParser
  */
 public class ParserException extends Exception {
     /**
