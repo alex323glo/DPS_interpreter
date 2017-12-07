@@ -1,0 +1,13 @@
+com.alex323glo.dps
+com.alex323glo.dps.interpreter
+com.alex323glo.dps.interpreter.exception
+com.alex323glo.dps.interpreter.model.config
+com.alex323glo.dps.interpreter.model.state
+com.alex323glo.dps.interpreter.model.state.map
+com.alex323glo.dps.interpreter.model.state.structured
+com.alex323glo.dps.interpreter.model.state.structured.components
+com.alex323glo.dps.parser
+com.alex323glo.dps.parser.exception
+com.alex323glo.dps.parser.model.command
+com.alex323glo.dps.parser.model.command.components.settings
+com.alex323glo.dps.parser.model.command.executor
