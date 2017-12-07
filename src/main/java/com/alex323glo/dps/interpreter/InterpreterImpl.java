@@ -1,5 +1,6 @@
 package com.alex323glo.dps.interpreter;
 
+import com.alex323glo.dps.interpreter.exception.ExecutionException;
 import com.alex323glo.dps.interpreter.exception.InterpreterException;
 import com.alex323glo.dps.interpreter.model.config.Config;
 import com.alex323glo.dps.interpreter.model.config.DefaultConfig;
@@ -152,7 +153,13 @@ public class InterpreterImpl implements Interpreter {
         }
 
         // TODO replace DEFAULT_CONFIG with real config
-        State resultState = command.execute(state, DEFAULT_CONFIG);
+        State resultState = null;
+        try {
+            resultState = command.execute(state, DEFAULT_CONFIG);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            throw new InterpreterException(String.format("can't execute command (%s) on state (%s)", command, state));
+        }
 
         if (resultState == null) {
             throw new InterpreterException(
