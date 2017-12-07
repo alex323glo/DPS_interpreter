@@ -1,16 +1,16 @@
-package com.alex323glo.dps.interpreter.model.state.components;
+package com.alex323glo.dps.interpreter.model.state.structured.components;
 
 import com.alex323glo.dps.interpreter.model.state.State;
 
 /**
- * DPS State Locale part model.
+ * DPS State Lib part model.
  *
  * @author alex323glo
  * @version 1.0.0
  *
  * @see State
  * */
-public class Locale {
+public class Lib {
 
     // TODO finish
 

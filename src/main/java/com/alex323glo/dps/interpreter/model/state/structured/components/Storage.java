@@ -1,4 +1,4 @@
-package com.alex323glo.dps.interpreter.model.state.components;
+package com.alex323glo.dps.interpreter.model.state.structured.components;
 
 import com.alex323glo.dps.interpreter.model.state.State;
 
