@@ -3,6 +3,7 @@ package com.alex323glo.dps.parser;
 import com.alex323glo.dps.interpreter.Interpreter;
 import com.alex323glo.dps.parser.exception.ParserException;
 import com.alex323glo.dps.parser.model.command.Command;
+import com.alex323glo.dps.parser.model.command.components.settings.MapSettings;
 import com.alex323glo.dps.parser.model.command.executor.ExecutorFactoryHolder;
 import com.alex323glo.dps.parser.model.command.executor.Executor;
 import com.alex323glo.dps.parser.model.command.executor.ExecutorFactory;
@@ -44,7 +45,6 @@ public class CommandParserImpl implements CommandParser {
 
         parser = new Parser(new ArrayList<>(syntaxCommandList));
     }
-
 
     /**
      * Parses String representation of group of DPS Commands to
@@ -131,12 +131,13 @@ public class CommandParserImpl implements CommandParser {
      */
     private Command wrapExecutionCommand(ExecutionCommand executionCommand) throws ParserException {
         ExecutorFactoryHolder factoryHolder = ExecutorFactoryHolder.getInstance();
-        ExecutorFactory executorFactory = factoryHolder.getFactory(executionCommand.getClass().getName());
+        ExecutorFactory executorFactory =
+                factoryHolder.getFactory(executionCommand.getSyntaxCommand().getClass().getName());
 
         if (executorFactory == null) {
             throw new ParserException(String.format(
                     "tempExecutorFactory is null (can't find needed ExecutorFactory by key (%s)",
-                    executionCommand.getClass().getName())
+                    executionCommand.getSyntaxCommand().getClass().getName())
             );
         }
 
@@ -146,6 +147,6 @@ public class CommandParserImpl implements CommandParser {
             throw new ParserException("tempExecutor is null (ExecutorFactory can't create instance of Executor)");
         }
 
-        return new Command(executionCommand, executor);
+        return new Command(executionCommand, executor, new MapSettings(executionCommand.getParams().toMap()));
     }
 }
