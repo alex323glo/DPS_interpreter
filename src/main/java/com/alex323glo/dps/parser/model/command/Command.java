@@ -1,6 +1,7 @@
 package com.alex323glo.dps.parser.model.command;
 
-import com.alex323glo.dps.parser.model.command.components.Settings;
+import com.alex323glo.dps.interpreter.exception.ExecutionException;
+import com.alex323glo.dps.parser.model.command.components.settings.Settings;
 import com.alex323glo.dps.interpreter.model.config.Config;
 import com.alex323glo.dps.interpreter.model.state.State;
 import com.alex323glo.dps.parser.model.command.executor.Executor;
@@ -18,8 +19,8 @@ import org.json.JSONObject;
 public class Command {
 
     private ExecutionCommand executionCommand;
-
     private Executor executor;
+    private Settings settings;
 
     /**
      * Initial constructor.
@@ -30,9 +31,10 @@ public class Command {
      * @see ExecutionCommand
      * @see Executor
      * */
-    public Command(ExecutionCommand executionCommand, Executor executor) {
+    public Command(ExecutionCommand executionCommand, Executor executor, Settings settings) {
         this.executionCommand = executionCommand;
         this.executor = executor;
+        this.settings = settings;
     }
 
     /**
@@ -45,12 +47,12 @@ public class Command {
      * @see State
      * @see Config
      */
-    public State execute(State state, Config config) {
+    public State execute(State state, Config config) throws ExecutionException {
         if (executor == null || executionCommand == null) {
             throw new NullPointerException("executionCommand or executor is null");
         }
 
-        return executor.execute(this, state, config);
+        return executor.execute(this, state, config);   // throw ExecutionException !
     }
 
     /**
@@ -84,12 +86,10 @@ public class Command {
      *
      * @return value of settings property
      *
-     * @throws UnsupportedOperationException must be override if needed!
-     *
      * @see Settings
      */
     public Settings getSettings() {
-        throw new UnsupportedOperationException("this operation is not defined yet");
+        return settings;
     }
 
     /**
@@ -97,12 +97,14 @@ public class Command {
      *
      * @param settings initial value of settings property
      *
-     * @throws UnsupportedOperationException must be override if needed!
-     *
      * @see Settings
      */
     public void setSettings(Settings settings) {
-        throw new UnsupportedOperationException("this operation is not defined yet");
+        if (settings == null) {
+            throw new NullPointerException("settings is null");
+        }
+
+        this.settings = settings;
     }
 
 }

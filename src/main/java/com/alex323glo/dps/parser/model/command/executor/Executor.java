@@ -1,5 +1,6 @@
 package com.alex323glo.dps.parser.model.command.executor;
 
+import com.alex323glo.dps.interpreter.exception.ExecutionException;
 import com.alex323glo.dps.interpreter.model.config.Config;
 import com.alex323glo.dps.interpreter.model.state.State;
 import com.alex323glo.dps.parser.model.command.Command;
@@ -28,6 +29,6 @@ public interface Executor {
      * @see State
      * @see Config
      * */
-    State execute(Command command, State state, Config config);
+    State execute(Command command, State state, Config config) throws ExecutionException;
 
 }
